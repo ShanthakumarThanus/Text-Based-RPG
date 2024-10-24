@@ -12,7 +12,10 @@ public class Main {
         store.printWeapons();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose a name : ");
+        System.out.println("Salut ! ");
+        System.out.println("Es-tu prêts à rejoindre l'aventure ? ");
+        System.out.println("D'abord... ");
+        System.out.println("Choisis ton pseudo : ");
         String name = scanner.nextLine();
         System.out.println(name);
     }
