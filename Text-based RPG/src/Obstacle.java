@@ -1,13 +1,10 @@
-public class Obstacle {
+public class Obstacle extends Destructible {
 
-    private static final double PV = 100; //variable de classe
-    private double health; //variable d'instance
+    private static final double LIFE = 50;
 
     public Obstacle() {
-        this.health = PV;
+        super(LIFE);
     }
 
-    public void hit(double d) {
-        this.health -= d;
-    }
 }
+

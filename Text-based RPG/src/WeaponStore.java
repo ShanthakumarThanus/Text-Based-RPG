@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class WeaponStore {
+
     private ArrayList<Weapon> weapons;
 
     public WeaponStore() {
@@ -14,7 +17,7 @@ public class WeaponStore {
         return this.weapons;
     }
 
-    public String printWeapons() {
+    public void printWeapons() {
         int i = 0;
         for (Weapon w : this.weapons) {
             System.out.println("[" + i + "]" + w.toString() + "\n" + w.asciiArt());

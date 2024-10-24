@@ -1,31 +1,25 @@
-public class Bow extends Weapon{
-    private static final double DAMAGE = 20; //maj : convention de nommage en majuscule pour les var type "final"
+public class Bow extends Weapon {
+
+    private static final double DAMAGE = 15;
     private static final double PRICE = 10;
-    private static final String NAME = "Axe";
+    private static final String NAME = "Bow";
+
+    private static final double MONSTER_DAMAGE_RATIO = 0.9;
+    private static final double OBSTACLE_DAMAGE_RATIO = 1.1;
+
 
     public Bow() {
-        super(DAMAGE, PRICE, NAME);
+        super(DAMAGE, PRICE, NAME, MONSTER_DAMAGE_RATIO, OBSTACLE_DAMAGE_RATIO);
     }
 
-    public String asciiArt(){
-        return "            4$$-.\n" +
-                "             4   \".\n" +
-                "             4    ^.\n" +
-                "             4     $\n" +
-                "             4     'b\n" +
-                "             4      \"b.\n" +
-                "             4        $\n" +
-                "             4        $r\n" +
-                "             4        $F\n" +
-                "  -$b========4========$b====*P=-\n" +
-                "             4       *$$F\n" +
-                "             4        $$\"\n" +
-                "             4       .$F\n" +
-                "             4       dP\n" +
-                "             4      F\n" +
-                "             4     @\n" +
-                "             4    .\n" +
-                "             J.\n"
-                ;
+    public String asciiArt() {
+        return
+                "   (         \n" +
+                        "    \\       \n" +
+                        "     )       \n" +
+                        "##-------->  \n" +
+                        "     )\n" +
+                        "    /        \n" +
+                        "   (         \n";
     }
 }
