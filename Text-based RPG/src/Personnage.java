@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Personnage {
@@ -5,7 +6,14 @@ public abstract class Personnage {
     private int PV;
     private int mana = 50; // ressource magique du perso
     private int argent;
-    private List<Weapon> arme;
+    private List<Weapon> armes;
+
+    public Personnage(String nom, int PV, int argent) {
+        this.nom = nom;
+        this.PV = PV;
+        this.argent = argent;
+        this.armes = new ArrayList<>();
+    }
 
     //getters
     public String getNom() {
@@ -24,8 +32,8 @@ public abstract class Personnage {
         return this.argent;
     }
 
-    public List<Weapon> getArme() {
-        return this.arme;
+    public List<Weapon> getArmes() {
+        return this.armes;
     }
 
     //setters
@@ -45,7 +53,7 @@ public abstract class Personnage {
         this.argent = argent;
     }
 
-    public void setArme(List<Weapon> arme) {
-        this.arme = arme;
+    public void setArmes(List<Weapon> armes) {
+        this.arme = armes;
     }
 }
