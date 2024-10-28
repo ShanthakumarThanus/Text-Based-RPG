@@ -14,9 +14,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Salut ! ");
         System.out.println("Es-tu prêts à rejoindre l'aventure ? ");
-        System.out.println("D'abord... ");
+        System.out.println("d'abord... ");
         System.out.println("Choisis ton pseudo : ");
         String name = scanner.nextLine();
-        System.out.println(name);
+        System.out.println("Parfait ! Bienvenue" + name);
     }
 }
