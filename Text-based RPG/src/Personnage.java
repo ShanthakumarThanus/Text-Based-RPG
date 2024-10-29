@@ -6,13 +6,13 @@ public abstract class Personnage {
     private int PV;
     private int mana = 50; // ressource magique du perso
     private int argent;
-    private List<Weapon> armes;
+    private Inventaire inventaire;
 
     public Personnage(String nom, int PV, int argent) {
         this.nom = nom;
         this.PV = PV;
         this.argent = argent;
-        this.armes = new ArrayList<>();
+        this.inventaire = new Inventaire(); // inventaire pour chaque perso
     }
 
     //getters
@@ -32,8 +32,8 @@ public abstract class Personnage {
         return this.argent;
     }
 
-    public List<Weapon> getArmes() {
-        return this.armes;
+    public Inventaire getInventaire() {
+        return this.inventaire;
     }
 
     //setters
@@ -53,7 +53,9 @@ public abstract class Personnage {
         this.argent = argent;
     }
 
-    public void setArmes(List<Weapon> armes) {
-        this.arme = armes;
+    public void setInventaire(Inventaire inventaire) {
+        this.inventaire = inventaire;
     }
+
+
 }
