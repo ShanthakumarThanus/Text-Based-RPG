@@ -5,18 +5,28 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        WeaponStore store = new WeaponStore();
-        /*for (Weapon w : store.getWeapons()) {
-            System.out.println(w.asciiArt());
-        }*/
-        store.printWeapons();
-
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Salut ! ");
-        System.out.println("Es-tu prêts à rejoindre l'aventure ? ");
-        System.out.println("d'abord... ");
-        System.out.println("Choisis ton pseudo : ");
-        String name = scanner.nextLine();
-        System.out.println("Parfait ! Bienvenue" + name);
+        WeaponStore store = new WeaponStore();
+
+        try {
+            System.out.println("Salut !");
+            Thread.sleep(1000); // Pause d'1 seconde
+            System.out.println("Es-tu prêt à rejoindre l'aventure ?");
+            Thread.sleep(1000);
+            System.out.println("D'abord...");
+            Thread.sleep(1000);
+            System.out.println("Choisis ton pseudo : ");
+            String name = scanner.nextLine();
+            System.out.println("Parfait ! Bienvenue " + name + " !");
+            Thread.sleep(1000);
+
+            System.out.println("Voici les armes qui sont à ta disposition actuellement :");
+            Thread.sleep(1000);
+            store.printWeapons();
+        } catch (InterruptedException e) {
+            System.err.println("Une erreur s'est produite pendant l'affichage.");
+        } finally {
+            scanner.close(); 
+        }
     }
 }
