@@ -1,13 +1,13 @@
-#RPG Basé sur du Texte
+# RPG Basé sur du Texte
 
-##Un jeu de rôle (RPG) classique en ligne de commande, développé en Java. Ce jeu permet aux joueurs de naviguer à travers différentes scènes et d'interagir avec des événements via des commandes textuelles.
+## Un jeu de rôle (RPG) classique en ligne de commande, développé en Java. Ce jeu permet aux joueurs de naviguer à travers différentes scènes et d'interagir avec des événements via des commandes textuelles.
 Fonctionnalités
 
     Interactions par ligne de commande
     Exploration de divers lieux
     Affrontement de défis et rencontres variées
 
-##Démarrage
+## Démarrage
 
     Cloner le dépôt :
 
