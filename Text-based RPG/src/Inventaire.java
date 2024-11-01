@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventaire {
-    private List<Objet> objets;
+    /*private List<Objet> objets;
 
     public Inventaire() {
         this.objets = new ArrayList<>();
@@ -49,5 +49,5 @@ public class Inventaire {
         } else {
             System.out.println("La potion n'est pas dans l'inventaire.");
         }
-    }
+    }*/
 }
