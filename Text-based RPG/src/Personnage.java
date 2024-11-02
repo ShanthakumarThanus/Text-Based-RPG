@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Personnage {
-    private String nom;
-    private int maxHP, HP, XP;
+    public String nom;
+    public int maxHP, HP, XP;
 
     public Personnage(String nom, int maxHP, int XP) {
         this.nom = nom;

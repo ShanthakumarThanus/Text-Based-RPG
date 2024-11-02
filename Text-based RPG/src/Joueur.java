@@ -3,7 +3,7 @@ public class Joueur extends Personnage {
     //nb entier pour stocker le nombre de upgrades/skills
     public int numAtkUpgrades, numDefUpgrades;
 
-    //tableaux pour stocker les noms des compétences
+    //tableaux pour stocker les noms des compétences, attaque et défense
     public String[] atkUpgrades = {"Strength", "Power", "Might", "Godlike Strenght"};
     public String[] defUpgrades = {"Heavy Bones", "Stoneskin", "Scale Armor", "Holy Aura"};
 
