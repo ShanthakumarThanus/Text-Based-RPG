@@ -6,7 +6,14 @@ public class MoteurDuJeu {
     static Joueur joueur;
     public static boolean isRunning;
 
-    public static int place = 0, act;
+    //évenements
+    public static String[] encounters = {"Bataille","Bataille","Bataille","Bataille","Pause"};
+
+    //les ennemis
+    public static String[] enemies = {"Ogre", "Ogre", "Gobelin", "Gobelin", "Dragon"};
+
+    //élements de l'histoire du jeu
+    public static int place = 0, act = 1;
     public static String[] places = {"Endroit 1", "Endroit 2", "Endroit 3", "Endroit 4"};
 
     //méthode pour récupérer la saisie de l'utilisateur
@@ -96,9 +103,65 @@ public class MoteurDuJeu {
         gameLoop();
     }
 
+    //méthode qui gère le chapitre du jeu
+    public static void checkAct() {
+        //changer le chapitre selon l'xp du joueur
+        if(joueur.XP >= 10 && act == 1) {
+            //level up le chapitre et changement de l'endroit où se situe le personnage
+            act = 2;
+            place = 1;
+            //affichage de l'outro du chapitre actuel
+            Histoire.printFirstActOutro();
+            //level up le joueur
+            joueur.chooseTrait();
+            //affichage de l'intro du chapitre suivant
+            Histoire.printSecondActIntro();
+            //nouvelles valeurs pour les ennemis
+            enemies[0] = "Mercenaire";
+            enemies[1] = "Gobelin";
+            enemies[2] = "Meute de loups";
+            enemies[3] = "Acolyte de l'empereur";
+            enemies[4] = "Vilain inconnu";
+            //nouvelles valeurs pour les ennemis
+            encounters[0] = "Battle";
+            encounters[1] = "Battle";
+            encounters[2] = "Battle";
+            encounters[3] = "Pause";
+            encounters[4] = "Aller à la boutique";
+        }else if(joueur.XP >= 50 && act == 2) {
+            act = 3;
+            place = 2;
+            Histoire.printSecondActIntro();
+            joueur.chooseTrait();
+            Histoire.printThirdActIntro();
+            //nouvelles valeurs pour les ennemis
+            enemies[0] = "Mercenaire";
+            enemies[1] = "Gobelin";
+            enemies[2] = "Meute de loups";
+            enemies[3] = "Acolyte de l'empereur";
+            enemies[4] = "Vilain inconnu";
+            //nouvelles valeurs pour les ennemis
+            encounters[0] = "Battle";
+            encounters[1] = "Battle";
+            encounters[2] = "Battle";
+            encounters[3] = "Pause";
+            encounters[4] = "Aller à la boutique";
+        } else if (joueur.XP >= 100 && act == 3) {
+            act = 4;
+            place = 3;
+            Histoire.printThirdActIntro();
+            joueur.chooseTrait();
+            Histoire.printFourthActOutro();
+        }
+    }
+
     //méthode pour que le joueur puisse continuer son aventure sur le jeu
     public static void continueAdventure() {
-
+        //vérifier si le niveau doit être incrémenté
+        checkAct();
+        //vérifier si le jeu n'est pas encore au dernier niveau
+        if(act != 4)
+            randomEncounter();
     }
 
     //affichage des infos à propos du personnage
