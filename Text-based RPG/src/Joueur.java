@@ -18,12 +18,12 @@ public class Joueur extends Personnage {
 
     @Override
     public int attaquer() {
-        return 0;
+        return (int) (Math.random()*(XP/4 + numAtkUpgrades*3 + 3) + XP/10 + numAtkUpgrades*2 + numDefUpgrades + 1);
     }
 
     @Override
     public int seDefendre() {
-        return 0;
+        return (int) (Math.random()*(XP/4 + numDefUpgrades*3 + 3) + XP/10 + numDefUpgrades*2 + numAtkUpgrades + 1);
     }
 
     //laissez le joueur choisir un trait de l'un ou l'autre chemin de compétence

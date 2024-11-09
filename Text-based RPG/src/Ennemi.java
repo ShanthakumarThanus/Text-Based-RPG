@@ -12,11 +12,11 @@ public class Ennemi extends Personnage {
     //méthode d'attaque et défense de la classe Ennemi
     @Override
     public int attaquer() {
-        return 0;
+        return (int) (Math.random()*(playerXP/4 + 1) + XP/4 + 3);
     }
 
     @Override
     public int seDefendre() {
-        return 0;
+        return (int) (Math.random()*(playerXP/4 + 1) + XP/4 + 3);
     }
 }

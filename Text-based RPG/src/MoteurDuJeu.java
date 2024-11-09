@@ -1,4 +1,4 @@
-import java.lang.management.PlatformLoggingMXBean;
+
 import java.util.Scanner;
 
 public class MoteurDuJeu {
@@ -103,7 +103,7 @@ public class MoteurDuJeu {
         gameLoop();
     }
 
-    //méthode qui gère le chapitre du jeu
+    //méthode qui gère les chapitres du jeu
     public static void checkAct() {
         //changer le chapitre selon l'xp du joueur
         if(joueur.XP >= 10 && act == 1) {
@@ -170,7 +170,7 @@ public class MoteurDuJeu {
         int encounter = (int) (Math.random()* encounters.length);
         //appel des méthodes selon les conditions
         if(encounters[encounter].equals("Bataille")) {
-            //randomBattle();
+            randomBattle();
         } else if(encounters[encounter].equals("Repos")) {
             //takeRest();
         } else {
@@ -216,6 +216,99 @@ public class MoteurDuJeu {
         System.out.println("(1) Continuer votre aventure");
         System.out.println("(2) Information sur votre personnage");
         System.out.println("(3) Quitter le jeu");
+    }
+
+    //bataille aléatoire
+    public static void randomBattle() {
+        clearConsole();
+        printHeading("Tu viens de rencontrer un ennemi, tu dois te battre contre lui !");
+        appuiePourContinuer();
+        //création d'un ennemi aléatoire
+        battle(new Ennemi(enemies[(int)(Math.random()*enemies.length)], joueur.XP));
+    }
+
+    //méthode qui gère les combats
+    public static void battle(Ennemi ennemi) {
+        while(true) {
+            clearConsole();
+            printHeading(ennemi.nom + "\nHP" + ennemi.HP + "/" + ennemi.maxHP);
+            printHeading(joueur.nom + "\nHP" + ennemi.HP + "/" + joueur.maxHP);
+            System.out.println("Choisi une action :");
+            System.out.println("(1) Se battre\n(2) Utiliser une potion\n(3) Fuir");
+            int input = readInt("->", 3);
+            //mécanisme d'action selon le choix du joueur
+            if(input == 1) {
+                //SE BATTRE
+                //calcul des dégats causés (dmg) et des dégats pris (dmgTook) (dégats (dmg) causés par l'ennemi au joueur)
+                int dmg = joueur.attaquer() - ennemi.seDefendre();
+                int dmgTook = ennemi.attaquer() - joueur.seDefendre();
+                //vérifier si le dégât causé et le dégat reçu n'est pas une valeur négatif
+                if(dmgTook < 0) {
+                    //ajout de quelques dégâts si le joueur se défend bien pour équilibrer l'attaque et la défense selon la caractéristique choisi par le joueur
+                    dmg -= dmgTook/2;
+                    dmgTook = 0;
+                }
+                if(dmg < 0) {
+                    dmg = 0;
+                }
+                //dégâts pour chaque parties
+                joueur.HP -= dmgTook;
+                ennemi.HP -= dmg;
+                //affichage les infos à propos de la partie courante de la bataille
+                clearConsole();
+                printHeading("BATAILLE");
+                System.out.println("L'" + ennemi.nom + "vous a mis " + dmgTook + ".");
+                appuiePourContinuer();
+                //vérifier si le joueur est toujours en vie
+                if(joueur.HP <= 0) {
+                    playerDied(); //méthode qui met fin au jeu
+                    break;
+                } else if(ennemi.HP <= 0) {
+                    //le joueur a gagné
+                    clearConsole();
+                    printHeading("Tu as battus " + ennemi.nom + "!");
+                    //augmentation de l'xp du joueur
+                    joueur.XP += ennemi.XP;
+                    System.out.println("Tu as obtenus " + ennemi.XP + "XP ! Bravo !");
+                    appuiePourContinuer();
+                    break;
+                }
+            } else if(input == 2) {
+                //UTILISER UNE POTION
+            } else {
+                //FUIR
+                clearConsole();
+                //vérifier que le joueur n'est pas contre le boss final
+                if(act != 4) {
+                    //mis une chance de 35% de s'enfuir
+                    if(Math.random()*10 + 1 <= 3.5) {
+                        printHeading("Tu as réussi à t'enfuir de " + ennemi.nom + "!");
+                        appuiePourContinuer();
+                        break;
+                    } else {
+                        printHeading("Tu n'as malheureusement pas réussi à t'enfuir.");
+                        //calcul des dégâts reçu par le joueur
+                        int dmgTook = ennemi.attaquer();
+                        System.out.println("Tu t'es pris " + dmgTook + " de dégât lorsque tu as essayé de t'enfuir !");
+                        appuiePourContinuer();
+                        //vérifier si le joueur est toujours en vie
+                        if(joueur.HP <= 0)
+                            playerDied();
+                    }
+                } else {
+                    printHeading("TU NE PEUX PAS T'ÉCHAPPER DE L'EMPEREUR !!!");
+                    appuiePourContinuer();
+                }
+            }
+        }
+    }
+
+    //méthode appelé lorsque le joueur est mort
+    public static void playerDied() {
+        clearConsole();
+        printHeading("Tu es mort...");
+        printHeading("Tu as obtenus " + joueur.XP + "XP durant ton aventure. Essaye de faire mieux la prochaine fois !");
+        isRunning = false;
     }
 
     //boucle activité du jeu
