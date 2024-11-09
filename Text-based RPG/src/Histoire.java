@@ -80,6 +80,18 @@ public class Histoire {
         MoteurDuJeu.appuiePourContinuer();
     }
 
+    public static void printFourthActIntro() {
+        MoteurDuJeu.clearConsole();
+        MoteurDuJeu.printSeparator(30);
+        System.out.println("Partie 4 - Intro");
+        MoteurDuJeu.printSeparator(30);
+        System.out.println("Vous êtes entrain de vous introduire dans le château de l'empereur");
+        System.out.println("Partie 4");
+        System.out.println("Partie 4");
+        System.out.println("\n P4");
+        MoteurDuJeu.appuiePourContinuer();
+    }
+
     public static void printFourthActOutro() {
         MoteurDuJeu.clearConsole();
         MoteurDuJeu.printSeparator(30);

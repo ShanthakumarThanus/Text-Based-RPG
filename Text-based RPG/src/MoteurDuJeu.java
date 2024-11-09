@@ -7,7 +7,7 @@ public class MoteurDuJeu {
     public static boolean isRunning;
 
     //évenements
-    public static String[] encounters = {"Bataille","Bataille","Bataille","Bataille","Pause"};
+    public static String[] encounters = {"Bataille","Bataille","Bataille","Bataille","Repos"};
 
     //les ennemis
     public static String[] enemies = {"Ogre", "Ogre", "Gobelin", "Gobelin", "Dragon"};
@@ -129,10 +129,14 @@ public class MoteurDuJeu {
             encounters[3] = "Pause";
             encounters[4] = "Aller à la boutique";
         }else if(joueur.XP >= 50 && act == 2) {
+            //level up le chapitre et changement de l'endroit où se situe le personnage
             act = 3;
             place = 2;
-            Histoire.printSecondActIntro();
+            //affichage de l'outro du chapitre actuel
+            Histoire.printSecondActOutro();
+            //level up le joueur
             joueur.chooseTrait();
+            //affichage de l'intro du chapitre suivant
             Histoire.printThirdActIntro();
             //nouvelles valeurs pour les ennemis
             enemies[0] = "Mercenaire";
@@ -146,12 +150,31 @@ public class MoteurDuJeu {
             encounters[2] = "Battle";
             encounters[3] = "Pause";
             encounters[4] = "Aller à la boutique";
+            // regénération du PV du joueur
+            joueur.HP = joueur.maxHP;
         } else if (joueur.XP >= 100 && act == 3) {
             act = 4;
             place = 3;
-            Histoire.printThirdActIntro();
+            Histoire.printThirdActOutro();
             joueur.chooseTrait();
-            Histoire.printFourthActOutro();
+            Histoire.printFourthActIntro();
+            // regénération du PV du joueur
+            joueur.HP = joueur.maxHP;
+            //appel du dernier combat
+            //finalBattle();
+        }
+    }
+
+    public static void randomEncounter() {
+        // nombre aléatoire entre 0 et la taille du tableau "encounters"
+        int encounter = (int) (Math.random()* encounters.length);
+        //appel des méthodes selon les conditions
+        if(encounters[encounter].equals("Bataille")) {
+            //randomBattle();
+        } else if(encounters[encounter].equals("Repos")) {
+            //takeRest();
+        } else {
+            //shop();
         }
     }
 
