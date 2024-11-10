@@ -193,7 +193,12 @@ public class MoteurDuJeu {
         printHeading("INFORMATION SUR VOTRE PERSONNAGE");
         System.out.println(joueur.nom + "\tHP : " + joueur.HP + "/" + joueur.maxHP);
         printSeparator(20);
-        System.out.println("XP : " + joueur.XP);
+        // info sur l'XP et Or du joueur
+        System.out.println("XP : " + joueur.XP + "\tLingot d'Or : " + joueur.gold);
+        printSeparator(20);
+
+        //info sur le nombre de potion du joueur
+        System.out.println("Potions : " + joueur.potion);
         printSeparator(20);
 
         //affichage du caractèristique choisi
@@ -216,6 +221,58 @@ public class MoteurDuJeu {
         System.out.println("(1) Continuer votre aventure");
         System.out.println("(2) Information sur votre personnage");
         System.out.println("(3) Quitter le jeu");
+    }
+
+    //Weapon store, rencontre avec un marchand
+    public static void shop() {
+        clearConsole();
+        printHeading("Tu viens de rencontrer un marchand te qui propose des objets qui pourraient te servir dans ton aventure. Il t'offre : ");
+        int price = (int) (Math.random()* (10 + joueur.potion*3) + 10 + joueur.potion);
+        System.out.println(" - Potion Magique : " + price + " lingot(s) d'Or.");
+        printSeparator(20);
+        //demander si le joueur voudrait acheter
+        System.out.println("As-tu envie d'en acheter ?\n(1) Oui\n(2)Non");
+        int input = readInt("-> ", 2);
+        //vérifier si le joueur a choisi d'en acheter
+        if(input == 1) {
+            clearConsole();
+            //vérifier si le joueur a assez de lingot d'or
+            if(joueur.gold >= price) {
+                printHeading("Vous avez acheter une potion pour " + price + "Lingot(s) d'Or.");
+                joueur.potion++;
+                joueur.gold -= price;
+            } else {
+                printHeading("Vous n'avez pas assez de Lingot d'Or pour acheter cela.");
+            }
+            appuiePourContinuer();
+        }
+    }
+
+    //se reposer
+    public static void takeRest() {
+        clearConsole();
+        if(joueur.restLeft >= 1) {
+            printHeading("As-tu envie d'aller te reposer ? (" + joueur.restLeft + " repos disponible).");
+            System.out.println("(1) Oui\n(2) Non");
+            int input = readInt("-> ", 2);
+            if(input == 1) {
+                //dans le cas où le joueur choisi de se reposer
+                clearConsole();
+                if(joueur.HP < joueur.maxHP) {
+                    int hpRestored = (int) (Math.random() * (joueur.XP/4 + 1) + 10);
+                    joueur.HP += hpRestored;
+                    if(joueur.HP > joueur.maxHP) {
+                        joueur.HP = joueur.maxHP;
+                    }
+                    System.out.println("Tu t'es reposés, ce qui signifie que tu as restoré ta vie jusqu'à " + hpRestored + "PV.");
+                    System.out.println("Tu es maintenant à " + joueur.HP + "/" + joueur.maxHP + "de PV");
+                    joueur.restLeft--;
+                }
+            } else {
+                System.out.println("Tu as entièrement restoré ta vie. Maintenant, va au champ de bataille !");
+            }
+            appuiePourContinuer();
+        }
     }
 
     //bataille aléatoire
@@ -271,10 +328,41 @@ public class MoteurDuJeu {
                     joueur.XP += ennemi.XP;
                     System.out.println("Tu as obtenus " + ennemi.XP + "XP ! Bravo !");
                     appuiePourContinuer();
+                    //récompense aléatoire
+                    boolean addRest = (Math.random()*5 + 1 <= 2.25);
+                    int goldEarned = (int) (Math.random()*ennemi.XP);
+                    if(addRest) {
+                        joueur.restLeft++;
+                        System.out.println("Tu as obtenus la possibilité de te reposer !");
+                    }
+                    if(goldEarned > 0) {
+                        joueur.gold += goldEarned;
+                        System.out.println("Tu as collecté " + goldEarned + " lingot(s) d'Or sur le corps de l'ennemi " + ennemi.nom " ! Bien joué !");
+                    }
+                    appuiePourContinuer();
                     break;
                 }
             } else if(input == 2) {
                 //UTILISER UNE POTION
+                clearConsole();
+                if(joueur.potion > 0 && joueur.HP < joueur.maxHP) {
+                    //le cas où le joueur a la possibilité de prendre une potion
+                    //confirmer que le joueur veut bien prendre une potion
+                    printHeading("Veux-tu consommer une potion magique ? (Vous avez " + joueur.potion + " ) potion(s).");
+                    System.out.println("(1) Oui\n(2) Non");
+                    input = readInt("-> ", 2);
+                    if(input == 1) {
+                        //le joueur consomme une potion
+                        joueur.HP = joueur.maxHP;
+                        clearConsole();
+                        printHeading("Tu as bu une potion magique ! Cela restore votre santé à " + joueur.maxHP);
+                        appuiePourContinuer();
+                    }
+                } else {
+                    //le cas où le joueur ne peut pas prendre de potion
+                    printHeading("Tu n'as pas assez de potions pour te guérir ou bien tu es déjà au maximum de ta santé.");
+                    appuiePourContinuer();
+                }
             } else {
                 //FUIR
                 clearConsole();
@@ -301,6 +389,11 @@ public class MoteurDuJeu {
                 }
             }
         }
+    }
+
+    //la bataille final du jeu
+    public static void finalBattle() {
+        
     }
 
     //méthode appelé lorsque le joueur est mort
