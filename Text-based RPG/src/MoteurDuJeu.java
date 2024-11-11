@@ -5,6 +5,7 @@ public class MoteurDuJeu {
     static Scanner scanner = new Scanner(System.in);
     static Joueur joueur;
     public static boolean isRunning;
+    static WeaponStore weaponStore = new WeaponStore();
 
     //évenements
     public static String[] encounters = {"Bataille","Bataille","Bataille","Bataille","Repos"};
@@ -220,7 +221,23 @@ public class MoteurDuJeu {
         printSeparator(20);
         System.out.println("(1) Continuer votre aventure");
         System.out.println("(2) Information sur votre personnage");
-        System.out.println("(3) Quitter le jeu");
+        System.out.println("(3) Aller à la boutique d'armes");
+        System.out.println("(4) Quitter le jeu");
+    }
+
+    public static void visitWeaponStore() {
+        clearConsole();
+        printHeading("Bienvenue dans la boutique");
+        //affiche les armes disponibles
+        weaponStore.printWeapons();
+        //demander au joueur de choisir une arme ou de quitter la boutique
+        System.out.println("Choisissez une arme à acheter en entrant le numéro (ou -1 pour quitter) : ");
+        int choice = readInt("-> ", weaponStore.getWeapons().size());
+
+        if (choice == -1) {
+            System.out.println("Vous quittez la boutique d'armes");
+            return;
+        }
     }
 
     //Weapon store, rencontre avec un marchand
