@@ -7,9 +7,9 @@ public class Histoire {
         MoteurDuJeu.printSeparator(30);
         System.out.println("HISTOIRE");
         MoteurDuJeu.printSeparator(30);
-        System.out.println("Vous êtes le seul être en capacité de renverser le pouvoir dirigé par ces intrus qui ont perquisitionné votre village...");
-        System.out.println("En effet... les défenseurs du village sont à court d'énergie et de renfort. Votre famille et le reste des habitants comptent sur vous pour libérer le village de ce contrôle anxiogène !");
-        System.out.println("Maintenant d'agir en l'honneur de ce qui compte pour vous, en planifiant votre plan d'attaque pour mettre en miette l'empereur qui a pris possession votre village et le libérer !");
+        System.out.println("Vous êtes un joueur prisonnier dans un donjon et votre objectif est de s'en sortir !");
+        System.out.println("Sur votre chemin, vous allez rencontrer des monstres coriace qui seront de plus en plus dangereux, ainsi que des obstacles.");
+        System.out.println("Maintenant c'est à vous d'aller à l'action pour retrouver votre liberté ! Prêt à relever ce défis ?!");
         MoteurDuJeu.appuiePourContinuer();
     }
 
@@ -18,7 +18,7 @@ public class Histoire {
         MoteurDuJeu.printSeparator(30);
         System.out.println("Partie 1 - Introduction");
         MoteurDuJeu.printSeparator(30);
-        System.out.println("Alors que vous démarrez votre aventure, vous commencez par traverser les coins quasiment innaccessible du village, près de la montagne");
+        System.out.println("Vous êtes entrain d'essayer de sortir de votre cellule, mais soudain, un monstre s'apperçois de vos mouvement suspect... ");
         System.out.println("C'est un endroit très dangereux. On dit que peu de gens en sont ressorties vivant de coin.");
         System.out.println("Assez décourageant n'est-ce pas ? Haha... BREF,tu agiras malgrè ces contraintes, pour qu'on puisse enfin une vie prospère. *lâche une larme* ");
         MoteurDuJeu.appuiePourContinuer();

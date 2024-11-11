@@ -67,7 +67,7 @@ public class MoteurDuJeu {
         clearConsole();
         printSeparator(40);
         printSeparator(40);
-        System.out.println("Mon Text-Based-RPG ! (j'ai pas trouvé de nom pour l'instant, désolé !");
+        System.out.println("Mon Text-Based-RPG ! (j'ai pas trouvé de nom pour l'instant, désolé !)");
         printSeparator(30);
         printSeparator(40);
         appuiePourContinuer();
@@ -161,7 +161,7 @@ public class MoteurDuJeu {
             // regénération du PV du joueur
             joueur.HP = joueur.maxHP;
             //appel du dernier combat
-            //finalBattle();
+            finalBattle();
         }
     }
 
@@ -172,9 +172,9 @@ public class MoteurDuJeu {
         if(encounters[encounter].equals("Bataille")) {
             randomBattle();
         } else if(encounters[encounter].equals("Repos")) {
-            //takeRest();
+            takeRest();
         } else {
-            //shop();
+            shop();
         }
     }
 
@@ -238,13 +238,14 @@ public class MoteurDuJeu {
             clearConsole();
             //vérifier si le joueur a assez de lingot d'or
             if(joueur.gold >= price) {
-                printHeading("Vous avez acheter une potion pour " + price + "Lingot(s) d'Or.");
+                printHeading("Vous avez acheté une potion pour " + price + "Lingot(s) d'Or.");
                 joueur.potion++;
                 joueur.gold -= price;
             } else {
                 printHeading("Vous n'avez pas assez de Lingot d'Or pour acheter cela.");
             }
             appuiePourContinuer();
+            randomBattle();
         }
     }
 
@@ -337,7 +338,7 @@ public class MoteurDuJeu {
                     }
                     if(goldEarned > 0) {
                         joueur.gold += goldEarned;
-                        System.out.println("Tu as collecté " + goldEarned + " lingot(s) d'Or sur le corps de l'ennemi " + ennemi.nom " ! Bien joué !");
+                        System.out.println("Tu as collecté " + goldEarned + " lingot(s) d'Or sur le corps de l'ennemi " + ennemi.nom + " ! Bien joué !");
                     }
                     appuiePourContinuer();
                     break;
@@ -393,7 +394,11 @@ public class MoteurDuJeu {
 
     //la bataille final du jeu
     public static void finalBattle() {
-        
+        //instanciation de l'empereur (boss final)
+        battle(new Ennemi("L'EMPEREUR", 300));
+        //affichage de la fin de l'histoire du jeu
+        Histoire.printEnd(joueur);
+        isRunning = false;
     }
 
     //méthode appelé lorsque le joueur est mort
