@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class MoteurDuJeu {
+public class Jeu {
     private static Personnage joueur;
     private static Carte carte;
     private static Magasin magasin;
@@ -14,12 +14,12 @@ public class MoteurDuJeu {
         System.out.print("Choisissez une caste (Sorcier, Elfe, Guerrier): ");
         String caste = scanner.nextLine();
         joueur = new Personnage(nom, caste);
-
         magasin = new Magasin();
         carte = new Carte(joueur);
 
         // Boucle de jeu
         while (joueur.getVie() > 0) {
+            carte.afficherCarte();
             System.out.println("\n1. Consulter les stats");
             System.out.println("2. Acheter une arme");
             System.out.println("3. Déplacer le joueur");
@@ -35,7 +35,6 @@ public class MoteurDuJeu {
                     magasin.acheterArme(joueur);
                     break;
                 case 3:
-                    // Déplacement
                     System.out.print("Entrez direction (haut, bas, gauche, droite): ");
                     String direction = scanner.next();
                     carte.deplacerJoueur(direction);
@@ -49,4 +48,3 @@ public class MoteurDuJeu {
         }
     }
 }
-
