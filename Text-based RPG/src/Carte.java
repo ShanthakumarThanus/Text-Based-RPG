@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Carte {
     private int[][] carte;
     private Personnage joueur;
@@ -27,28 +29,34 @@ public class Carte {
 
     public void deplacerJoueur(String direction) {
         switch (direction) {
-            case "haut":
+            case "z":
                 if (posX > 0) posX--;
                 break;
-            case "bas":
+            case "s":
                 if (posX < carte.length - 1) posX++;
                 break;
-            case "gauche":
+            case "q":
                 if (posY > 0) posY--;
                 break;
-            case "droite":
+            case "d":
                 if (posY < carte[0].length - 1) posY++;
+                break;
+            case "e" :
+                System.out.println("------------------");
                 break;
             default:
                 System.out.println("Direction invalide.");
                 return;
         }
 
-        System.out.println("Vous vous déplacez vers : " + direction);
-        rencontrerObstacleOuMonstre();
+        if (!direction.equals("e")) {
+            System.out.println("Vous vous déplacez vers : " + direction);
+            rencontrerObstacleOuMonstre();
+        }
     }
 
     public void rencontrerObstacleOuMonstre() {
+        Scanner scanner = new Scanner(System.in);
         int caseActuelle = carte[posX][posY];
         if (caseActuelle == 1) {
             System.out.println("Vous avez rencontré un monstre !");
@@ -57,7 +65,25 @@ public class Carte {
             Combat.combattre(joueur, monstre);
         } else if (caseActuelle == 2) {
             System.out.println("Vous avez rencontré un obstacle !");
+            Obstacle obstacle = new Obstacle();
             // Choisir de détruire l'obstacle ou fuir
+            System.out.println("Vous souhaitez détruire l'obstacle (1) ou.... fuir ?! (2)");
+            int choix = scanner.nextInt();
+            if (choix == 1) {
+                int degats = joueur.getDegatsMax(); // récupération du dégat max actuel que peut faire le joueur
+                obstacle.hit(degats);
+                System.out.println("Vous avez infligé " + degats + " points de dégâts à l'obstacle.");
+
+                if(obstacle.health <= 0) {
+                    System.out.println("L'obstacle a été détruit !");
+                    carte[posX][posY] = 0; // maintenant la case est marquée comme vide
+                } else {
+                    System.out.println("L'obstacle résiste encore ! Points de vie restants : " + obstacle.health);
+                }
+            } else {
+                System.out.println("Vous avez décidé de fuir ! Peut-être que vous devriez acheter une arme ?");
+            }
+
         } else if (posX == 4 && posY == 4) {
             System.out.println("Félicitations, vous avez atteint la sortie !");
         }

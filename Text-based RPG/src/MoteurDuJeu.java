@@ -20,6 +20,7 @@ public class MoteurDuJeu {
 
         // Boucle de jeu
         while (joueur.getVie() > 0) {
+            carte.afficherCarte();
             System.out.println("\n1. Consulter les stats");
             System.out.println("2. Acheter une arme");
             System.out.println("3. Déplacer le joueur");
@@ -29,14 +30,16 @@ public class MoteurDuJeu {
 
             switch (choix) {
                 case 1:
+                    // Afficher les stats du joueur
                     joueur.afficherStats();
                     break;
                 case 2:
+                    // Visiter la boutique d'armes
                     magasin.acheterArme(joueur);
                     break;
                 case 3:
                     // Déplacement
-                    System.out.print("Entrez direction (haut, bas, gauche, droite): ");
+                    System.out.print("Entrez direction (haut (z), bas (s), gauche (q), droite (d)) ou quitter la map (e) : ");
                     String direction = scanner.next();
                     carte.deplacerJoueur(direction);
                     break;

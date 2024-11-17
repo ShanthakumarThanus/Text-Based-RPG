@@ -1,10 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Personnage {
+
     private String nom;
     private int argent;
     private int xp;
     private int mana;
     private int vie;
     private String caste;
+    private List<Arme> armes;
 
     public Personnage(String nom, String caste) {
         this.nom = nom;
@@ -13,6 +18,7 @@ public class Personnage {
         this.mana = 50;
         this.vie = 100;
         this.caste = caste;
+        this.armes = new ArrayList<>();
     }
 
     // Getters et setters
@@ -38,6 +44,20 @@ public class Personnage {
     public void consommerMana(int points) {
         this.mana -= points;
     }
+
+    public void ajouterArme(Arme a) {
+        this.armes.add(a);
+        System.out.println("L'arme " + a.getNOM() + "a été ajoutée à votre inventaire.");
+    }
+
+    public int getDegatsMax() {
+        if (!armes.isEmpty()) {
+            // pour détruire un mur, on choisi l'arme la plus puissante présent dans l'inventaire du joueur
+            return armes.stream().mapToInt(Arme::getDEGAT).max().orElse(0);
+        }
+        return 5; // Dégâts de base si aucune arme n'est équipée, avec ses poings, le pauvre :(
+    }
+
 
     public void afficherStats() {
         System.out.println("Nom: " + nom);
