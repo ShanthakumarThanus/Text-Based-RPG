@@ -4,40 +4,40 @@ import java.util.List;
 public class Personnage {
 
     private String nom;
-    private int argent;
+    private double argent;
     private int xp;
     private int mana;
-    private int vie;
+    private double vie;
     private String caste;
-    private List<Arme> armes;
+    private List<Weapon> weapons;
 
     public Personnage(String nom, String caste) {
         this.nom = nom;
-        this.argent = 100;
+        this.argent = 10.0;
         this.xp = 0;
         this.mana = 50;
         this.vie = 100;
         this.caste = caste;
-        this.armes = new ArrayList<>();
+        this.weapons = new ArrayList<>();
     }
 
     // Getters et setters
     public String getNom() { return nom; }
-    public int getArgent() { return argent; }
+    public double getArgent() { return argent; }
     public int getXp() { return xp; }
     public int getMana() { return mana; }
-    public int getVie() { return vie; }
+    public double getVie() { return vie; }
     public String getCaste() { return caste; }
 
     public void gagnerXp(int points) {
         this.xp += points;
     }
 
-    public void perdreVie(int points) {
+    public void perdreVie(double points) {
         this.vie -= points;
     }
 
-    public void gagnerArgent(int montant) {
+    public void gagnerArgent(double montant) {
         this.argent += montant;
     }
 
@@ -45,15 +45,15 @@ public class Personnage {
         this.mana -= points;
     }
 
-    public void ajouterArme(Arme a) {
-        this.armes.add(a);
-        System.out.println("L'arme " + a.getNOM() + "a été ajoutée à votre inventaire.");
+    public void ajouterArme(Weapon weapon) {
+        this.weapons.add(weapon);
+        System.out.println("L'arme " + weapon.getName() + "a été ajoutée à votre inventaire.");
     }
 
-    public int getDegatsMax() {
-        if (!armes.isEmpty()) {
+    public double getDegatsMax() {
+        if (!weapons.isEmpty()) {
             // pour détruire un mur, on choisi l'arme la plus puissante présent dans l'inventaire du joueur
-            return armes.stream().mapToInt(Arme::getDEGAT).max().orElse(0);
+            return weapons.stream().mapToDouble(Weapon::getDamage).max().orElse(5);
         }
         return 5; // Dégâts de base si aucune arme n'est équipée, avec ses poings, le pauvre :(
     }
