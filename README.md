@@ -31,13 +31,13 @@ Ce RPG basé sur du texte est un jeu de rôle textuel où le joueur explore un d
 
 Voici les principales classes et leurs responsabilités :
     
-    Personnage : Représente le joueur, gérant ses statistiques (points de vie, armes, or, etc.).
-    Weapon : Définit les armes disponibles dans le jeu, leurs dégâts et leurs prix.
-    Monster : Représente les ennemis que le joueur rencontre, avec des points de vie, un nom et une récompense en XP.
-    Obstacle : Définit les obstacles sur la carte et leur destruction.
-    Carte : Gère la carte du donjon, le positionnement des monstres et des obstacles, ainsi que les déplacements du joueur.
-    Combat : Système de combat entre le joueur et un monstre.
-    WeaponStore : Boutique où le joueur peut acheter des armes.
+ - **Personnage :** Représente le joueur, gérant ses statistiques (points de vie, armes, or, etc.).
+ Weapon : Définit les armes disponibles dans le jeu, leurs dégâts et leurs prix.
+ Monster : Représente les ennemis que le joueur rencontre, avec des points de vie, un nom et une récompense en XP.
+ Obstacle : Définit les obstacles sur la carte et leur destruction.
+ Carte : Gère la carte du donjon, le positionnement des monstres et des obstacles, ainsi que les déplacements du joueur.
+ Combat : Système de combat entre le joueur et un monstre.
+ WeaponStore : Boutique où le joueur peut acheter des armes.
 
 ## **Comment Jouer**
 
