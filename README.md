@@ -41,10 +41,10 @@ Voici les principales classes et leurs responsabilités :
 
 ## **Comment Jouer**
 
- Lancer le jeu : Une fois le projet démarré, suivez les instructions affichées dans la console.
- Commandes principales :
-     Déplacez le joueur à l'aide des touches :
-         z (haut), s (bas), q (gauche), d (droite).
-     Interagissez avec les obstacles ou les monstres lorsque vous les rencontrez.
-     Utilisez l'or pour acheter des armes et améliorer vos capacités.
- Objectif final : Atteignez la sortie du donjon à la position [4,4].
+    Lancer le jeu : Une fois le projet démarré, suivez les instructions affichées dans la console.
+    Commandes principales :
+        Déplacez le joueur à l'aide des touches :
+            z (haut), s (bas), q (gauche), d (droite).
+        Interagissez avec les obstacles ou les monstres lorsque vous les rencontrez.
+        Utilisez l'or pour acheter des armes et améliorer vos capacités.
+    Objectif final : Atteignez la sortie du donjon à la position [4,4].
